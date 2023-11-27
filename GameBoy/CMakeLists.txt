@@ -25,6 +25,7 @@ set(SOURCES
     src/GameBoy_Memory.cpp
     src/PixelFIFO.cpp
     src/PPU.cpp
+    src/wasm_exports.cpp
 )
 
 set(CMAKE_CXX_STANDARD 17)
@@ -43,3 +44,9 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE ${PROJECT_SOURCE_DIR}/src/include
     PUBLIC ${PROJECT_SOURCE_DIR}/include
 )
+
+# WebAssembly target
+include_directories(${PROJECT_SOURCE_DIR}/src/include)
+include_directories(${PROJECT_SOURCE_DIR}/include)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s WASM=1")
+add_executable(GameBoyWASM ${SOURCES})
